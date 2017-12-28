@@ -16,14 +16,17 @@ public class ProjectileAI : MonoBehaviour {
 
         //Measured from the center of the camera to the edge (horizontally / vertically)
         cameraSize = theCamera.GetComponent<Camera>().orthographicSize;
-	}
+
+        // Spawn Point
+        transform.position = new Vector2(Random.Range(-FloorGeneration.groundLength, FloorGeneration.groundLength), Random.Range(10, 20));
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
         if(transform.position.y < (theCamera.transform.position.y - cameraSize))
         {
-            transform.position = new Vector2(Random.Range(-FloorGeneration.groundLength,FloorGeneration.groundLength), Random.Range(5, 15));
+            transform.position = new Vector2(Random.Range(-FloorGeneration.groundLength,FloorGeneration.groundLength), Random.Range(10, 20));
         }
 	}
 
@@ -31,13 +34,13 @@ public class ProjectileAI : MonoBehaviour {
     {
         if(otherObject.gameObject.tag == "RespawnTrigger")
         {
-            transform.position = new Vector2(Random.Range(-FloorGeneration.groundLength, FloorGeneration.groundLength), Random.Range(5, 15));
+            transform.position = new Vector2(Random.Range(-FloorGeneration.groundLength, FloorGeneration.groundLength), Random.Range(10, 20));
             Destroy(otherObject.gameObject);
         }
-        /*
+
         if(otherObject.gameObject.tag == "Player")
         {
             gameFlow.SendMessage("killPlayer");
-        }*/
+        }
     }
 }

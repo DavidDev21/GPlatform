@@ -8,7 +8,6 @@ public class CameraController : MonoBehaviour {
     public float maxX;
     public float minY;
     public float maxY;
-    private float cameraOffset = 4f; // Offset from the player object
 
     private GameObject player;
 

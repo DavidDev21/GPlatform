@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour {
 
 	private float playerSpeed = 20f;
-    private float jumpPower = 500f;
+    private float jumpPower = 450f;
 
     private bool isFacingRight = true;
-
-
+    private bool doubleJumpEnable = true;
+    private bool touchingGround = false; // Not initally
 
 	// Update is called once per frame
 	void Update ()
@@ -49,10 +49,27 @@ public class PlayerController : MonoBehaviour {
 	// jump Player
 	void jumpPlayer()
 	{
-        GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpPower);
+        if(touchingGround || (!touchingGround && doubleJumpEnable))
+        {
+            if (!touchingGround)
+                doubleJumpEnable = false;
+            GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpPower);
+        }
+        touchingGround = false;
 	}
-	// Flips the Orientation of the player, by negating the scale on the x-axis
-	void flipPlayer()
+
+    // Enables doubleJump if touching the ground again
+    void OnCollisionEnter2D(Collision2D otherObject)
+    {
+        if(otherObject.gameObject.tag == "RespawnTrigger")
+        {
+            doubleJumpEnable = true;
+            touchingGround = true;
+        }
+    }
+
+    // Flips the Orientation of the player, by negating the scale on the x-axis
+    void flipPlayer()
 	{
 		isFacingRight = !isFacingRight;
         Vector2 newScale = gameObject.transform.localScale;

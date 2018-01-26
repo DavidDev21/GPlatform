@@ -30,6 +30,7 @@ public class GameFlowController : MonoBehaviour {
         score.enabled = false;
         timerText.enabled = true;
 
+        // Generates Projectiles at start of game
         for(int i = 1; i < 5; ++i)
         {
             Instantiate(GameObject.FindGameObjectWithTag("Projectile"));
@@ -45,6 +46,11 @@ public class GameFlowController : MonoBehaviour {
         }
         timerText.text = "Timer: " + timer.ToString("f2");
         timer += Time.deltaTime;
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     // the check for restartGame() must be after Update() determines whether the player is dead

@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
 
     private bool isFacingRight = true;
     private bool doubleJumpEnable = true;
-    private bool touchingGround = false; // Not initally
+    private bool touchingGround = false; // Not initally on ground
 
 	// Update is called once per frame
 	void Update ()

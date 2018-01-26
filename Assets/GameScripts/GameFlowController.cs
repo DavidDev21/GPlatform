@@ -46,6 +46,11 @@ public class GameFlowController : MonoBehaviour {
         }
         timerText.text = "Timer: " + timer.ToString("f2");
         timer += Time.deltaTime;
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     // the check for restartGame() must be after Update() determines whether the player is dead
